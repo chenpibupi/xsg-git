@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>xsg</groupId>
+        <artifactId>xsg</artifactId>
+        <version>3.6.3</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>xsg-common-log</module>
+        <module>xsg-common-core</module>
+        <module>xsg-common-redis</module>
+        <module>xsg-common-seata</module>
+        <module>xsg-common-swagger</module>
+        <module>xsg-common-security</module>
+        <module>xsg-common-datascope</module>
+        <module>xsg-common-datasource</module>
+    </modules>
+
+    <artifactId>xsg-common</artifactId>
+    <packaging>pom</packaging>
+<!--    <dependencies>-->
+<!--        &lt;!&ndash; mybatis-plus 增强CRUD &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--            <version>3.5.1</version>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
+
+    <description>
+        xsg-common通用模块
+    </description>
+
+</project>

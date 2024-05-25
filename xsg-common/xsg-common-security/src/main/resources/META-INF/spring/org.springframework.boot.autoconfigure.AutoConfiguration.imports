@@ -1,0 +1,5 @@
+com.xsg.common.security.config.WebMvcConfig
+com.xsg.common.security.service.TokenService
+com.xsg.common.security.aspect.PreAuthorizeAspect
+com.xsg.common.security.aspect.InnerAuthAspect
+com.xsg.common.security.handler.GlobalExceptionHandler

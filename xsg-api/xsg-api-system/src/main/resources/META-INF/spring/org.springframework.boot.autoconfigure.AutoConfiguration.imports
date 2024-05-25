@@ -1,0 +1,3 @@
+com.xsg.system.api.factory.RemoteUserFallbackFactory
+com.xsg.system.api.factory.RemoteLogFallbackFactory
+com.xsg.system.api.factory.RemoteFileFallbackFactory

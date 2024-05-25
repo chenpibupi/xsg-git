@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xsg.system.mapper.ArticleContentMapper">
+    
+    <resultMap type="ArticleContent" id="ArticleContentResult">
+        <result property="id"    column="id"    />
+        <result property="articleId"    column="article_id"    />
+        <result property="content"    column="content"    />
+        <result property="description"    column="description"    />
+    </resultMap>
+
+    <sql id="selectArticleContentVo">
+        select id, article_id, content, description from article_content
+    </sql>
+
+    <select id="selectArticleContentList" parameterType="ArticleContent" resultMap="ArticleContentResult">
+        <include refid="selectArticleContentVo"/>
+        <where>  
+            <if test="articleId != null "> and article_id = #{articleId}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectArticleContentById" parameterType="Long" resultMap="ArticleContentResult">
+        <include refid="selectArticleContentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertArticleContent" parameterType="ArticleContent" useGeneratedKeys="true" keyProperty="id">
+        insert into article_content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">article_id,</if>
+            <if test="content != null">content,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">#{articleId},</if>
+            <if test="content != null">#{content},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArticleContent" parameterType="ArticleContent">
+        update article_content
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="articleId != null">article_id = #{articleId},</if>
+            <if test="content != null">content = #{content},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteArticleContentById" parameterType="Long">
+        delete from article_content where id = #{id}
+    </delete>
+
+    <delete id="deleteArticleContentByIds" parameterType="String">
+        delete from article_content where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

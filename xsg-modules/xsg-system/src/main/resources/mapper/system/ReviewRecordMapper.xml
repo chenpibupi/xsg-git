@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xsg.system.mapper.ReviewRecordMapper">
+    <resultMap type="ReviewRecord" id="ReviewRecordResult">
+        <result property="id"    column="id"    />
+        <result property="articleId"    column="article_id"    />
+        <result property="reviewerName"    column="reviewer_name"    />
+        <result property="reviewContent"    column="review_content"    />
+        <result property="reviewTime"    column="review_time"    />
+    </resultMap>
+
+    <sql id="selectReviewRecordVo">
+        select id, article_id, reviewer_name, review_content, review_time from review_record
+    </sql>
+
+    <!--查询每个角色最新的审核记录-->
+    <select id="selectLatestRecords" parameterType="java.lang.Long" resultType="com.xsg.system.domain.ReviewRecord">
+        SELECT *
+        FROM (
+                 SELECT *,
+                        ROW_NUMBER() OVER(PARTITION BY create_user ORDER BY update_time DESC) AS row_num
+                 FROM review_record
+                 WHERE article_id = #{articleId}
+             ) AS ranked_records
+        WHERE row_num = 1;
+    </select>
+
+
+    <delete id="deleteReviewRecordById" parameterType="Long">
+        delete from review_record where id = #{id}
+    </delete>
+
+    <delete id="deleteReviewRecordByIds" parameterType="String">
+        delete from review_record where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

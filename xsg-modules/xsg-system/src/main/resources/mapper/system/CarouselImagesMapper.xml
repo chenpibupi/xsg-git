@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xsg.system.mapper.CarouselImagesMapper">
+
+    <resultMap type="CarouselImages" id="CarouselImagesResult">
+        <result property="id"    column="id"    />
+        <result property="imageName"    column="image_name"    />
+        <result property="imagePath"    column="imagePath"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updater"    column="updater"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectCarouselImagesVo">
+        select id, image_name, imagePath, create_by, create_time, updater, update_time from carousel_images
+    </sql>
+
+    <select id="selectCarouselImagesList" parameterType="CarouselImages" resultMap="CarouselImagesResult">
+        <include refid="selectCarouselImagesVo"/>
+        <where>
+            <if test="imageName != null  and imageName != ''"> and image_name like concat('%', #{imageName}, '%')</if>
+            <if test="imagePath != null  and imagePath != ''"> and imagePath = #{imagePath}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+        </where>
+    </select>
+
+    <select id="selectCarouselImagesById" parameterType="Long" resultMap="CarouselImagesResult">
+        <include refid="selectCarouselImagesVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCarouselImages" parameterType="CarouselImages" useGeneratedKeys="true" keyProperty="id">
+        insert into carousel_images
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="imageName != null and imageName != ''">image_name,</if>
+            <if test="imagePath != null and imagePath != ''">imagePath,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="imageName != null and imageName != ''">#{imageName},</if>
+            <if test="imagePath != null and imagePath != ''">#{imagePath},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCarouselImages" parameterType="CarouselImages">
+        update carousel_images
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="imageName != null and imageName != ''">image_name = #{imageName},</if>
+            <if test="imagePath != null and imagePath != ''">imagePath = #{imagePath},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updater != null">updater = #{updater},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCarouselImagesById" parameterType="Long">
+        delete from carousel_images where id = #{id}
+    </delete>
+
+    <delete id="deleteCarouselImagesByIds" parameterType="String">
+        delete from carousel_images where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

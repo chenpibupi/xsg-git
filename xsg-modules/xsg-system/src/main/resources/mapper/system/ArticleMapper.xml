@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xsg.system.mapper.ArticleMapper">
+    
+    <resultMap type="Article" id="ArticleResult">
+        <result property="id"    column="id"    />
+        <result property="articleNumber"    column="article_number"    />
+        <result property="articleTitle"    column="article_title"    />
+        <result property="articleType"    column="article_type"    />
+        <result property="coverImageUrl"    column="cover_image_url"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="finalUploadTime"    column="final_upload_time"    />
+        <result property="authorAccount"    column="author_account"    />
+        <result property="authorName"    column="author_name"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectArticleVo">
+        select id, article_number, article_title, article_type, cover_image_url, create_time, update_time, final_upload_time, author_account, author_name, phone_number, status from article
+    </sql>
+
+    <select id="selectArticleList" parameterType="Article" resultMap="ArticleResult">
+        <include refid="selectArticleVo"/>
+        <where>  
+            <if test="articleNumber != null  and articleNumber != ''"> and article_number = #{articleNumber}</if>
+            <if test="articleTitle != null  and articleTitle != ''"> and article_title = #{articleTitle}</if>
+            <if test="articleType != null "> and article_type = #{articleType}</if>
+            <if test="coverImageUrl != null  and coverImageUrl != ''"> and cover_image_url = #{coverImageUrl}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="finalUploadTime != null "> and final_upload_time = #{finalUploadTime}</if>
+            <if test="authorAccount != null  and authorAccount != ''"> and author_account = #{authorAccount}</if>
+            <if test="authorName != null  and authorName != ''"> and author_name like concat('%', #{authorName}, '%')</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectArticleById" parameterType="Long" resultMap="ArticleResult">
+        <include refid="selectArticleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="id">
+        insert into article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleNumber != null">article_number,</if>
+            <if test="articleTitle != null and articleTitle != ''">article_title,</if>
+            <if test="articleType != null">article_type,</if>
+            <if test="coverImageUrl != null">cover_image_url,</if>
+            <if test="createTime != null ">create_time</if>
+            <if test="updateTime != null ">update_time</if>
+            <if test="finalUploadTime != null">final_upload_time,</if>
+            <if test="authorAccount != null">author_account,</if>
+            <if test="authorName != null">author_name,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleNumber != null">#{articleNumber},</if>
+            <if test="articleTitle != null and articleTitle != ''">#{articleTitle},</if>
+            <if test="articleType != null">#{articleType},</if>
+            <if test="coverImageUrl != null">#{coverImageUrl},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="finalUploadTime != null">#{finalUploadTime},</if>
+            <if test="authorAccount != null">#{authorAccount},</if>
+            <if test="authorName != null">#{authorName},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArticle" parameterType="Article">
+        update article
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="articleNumber != null">article_number = #{articleNumber},</if>
+            <if test="articleTitle != null and articleTitle != ''">article_title = #{articleTitle},</if>
+            <if test="articleType != null">article_type = #{articleType},</if>
+            <if test="coverImageUrl != null">cover_image_url = #{coverImageUrl},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="finalUploadTime != null">final_upload_time = #{finalUploadTime},</if>
+            <if test="authorAccount != null">author_account = #{authorAccount},</if>
+            <if test="authorName != null">author_name = #{authorName},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteArticleById" parameterType="Long">
+        delete from article where id = #{id}
+    </delete>
+
+    <delete id="deleteArticleByIds" parameterType="String">
+        delete from article where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

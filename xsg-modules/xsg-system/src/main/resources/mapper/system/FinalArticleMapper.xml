@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xsg.system.mapper.FinalArticleMapper">
+    
+    <resultMap type="FinalArticle" id="FinalArticleResult">
+        <result property="id"    column="id"    />
+        <result property="articleId"    column="article_id"    />
+        <result property="finalArticleFile"    column="final_article_file"    />
+        <result property="finalUploadTime"    column="final_upload_time"    />
+    </resultMap>
+
+    <sql id="selectFinalArticleVo">
+        select id, article_id, final_article_file, final_upload_time from final_article
+    </sql>
+
+    <select id="selectFinalArticleList" parameterType="FinalArticle" resultMap="FinalArticleResult">
+        <include refid="selectFinalArticleVo"/>
+        <where>  
+            <if test="articleId != null "> and article_id = #{articleId}</if>
+            <if test="finalArticleFile != null  and finalArticleFile != ''"> and final_article_file = #{finalArticleFile}</if>
+            <if test="finalUploadTime != null "> and final_upload_time = #{finalUploadTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectFinalArticleById" parameterType="Long" resultMap="FinalArticleResult">
+        <include refid="selectFinalArticleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFinalArticle" parameterType="FinalArticle" useGeneratedKeys="true" keyProperty="id">
+        insert into final_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">article_id,</if>
+            <if test="finalArticleFile != null">final_article_file,</if>
+            <if test="finalUploadTime != null">final_upload_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">#{articleId},</if>
+            <if test="finalArticleFile != null">#{finalArticleFile},</if>
+            <if test="finalUploadTime != null">#{finalUploadTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFinalArticle" parameterType="FinalArticle">
+        update final_article
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="articleId != null">article_id = #{articleId},</if>
+            <if test="finalArticleFile != null">final_article_file = #{finalArticleFile},</if>
+            <if test="finalUploadTime != null">final_upload_time = #{finalUploadTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFinalArticleById" parameterType="Long">
+        delete from final_article where id = #{id}
+    </delete>
+
+    <delete id="deleteFinalArticleByIds" parameterType="String">
+        delete from final_article where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
