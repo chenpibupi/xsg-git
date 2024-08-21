@@ -1,3 +1,13 @@
+## 新时光在线投稿平台
+
+本项目基于RuoYi-Cloud进行搭建，构建了一个期刊投稿系统，包含投稿、审稿、上传稿件等多个功能。
+
+
+
+
+
+## RuoYi平台简介
+
 <p align="center">
 	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-b99b286755aef70355a7084753f89cdb7c9.png">
 </p>
@@ -9,8 +19,6 @@
 	<a href="https://gitee.com/y_project/RuoYi-Cloud/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
 </p>
 
-## 平台简介
-
 若依是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
 
 * 采用前后端分离的模式，微服务版本前端(基于 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue))。
@@ -18,7 +26,7 @@
 * 注册中心、配置中心选型Nacos，权限认证使用Redis。
 * 流量控制框架选型Sentinel，分布式事务选型Seata。
 
-#### 友情链接 [若依/RuoYi-Cloud](https://gitee.com/zhangmrit/ruoyi-cloud) Ant Design版本。
+#### 友情链接 [若依/RuoYi-Cloud](https://gitee.com/zhangmrit/ruoyi-cloud) 版本。
 
 ## 系统模块
 
@@ -41,10 +49,10 @@ com.ruoyi
 ├── ruoyi-modules         // 业务模块
 │       └── ruoyi-system                              // 系统模块 [9201]
 │       └── ruoyi-gen                                 // 代码生成 [9202]
-│       └── ruoyi-job                                 // 定时任务 [9203]
-│       └── ruoyi-file                                // 文件服务 [9300]
+│       └── ruoyi-job                                 // 定时任务 [9203]  未使用
+│       └── ruoyi-file                                // 文件服务 [9300] 
 ├── ruoyi-visual          // 图形化管理模块
-│       └── ruoyi-visual-monitor                      // 监控中心 [9100]
+│       └── ruoyi-visual-monitor                      // 监控中心 [9100]  未使用
 ├──pom.xml                // 公共依赖
 ~~~
 
@@ -72,18 +80,60 @@ com.ruoyi
 16. 在线构建器：拖动表单元素生成相应的HTML代码。
 17. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
-## 在线体验
-
-- admin/admin123  
-- 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
-
-演示地址：http://ruoyi.vip  
-文档地址：http://doc.ruoyi.vip
-
 ## 演示图
 
-![输入图片说明](%E5%B1%95%E7%A4%BA%E5%9B%BEimage.png)
+![image-20240821201651825](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212016958.png)
 
-登录界面图
+​																										登录界面图
 
-注册界面图
+![image-20240821201637088](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212016206.png)
+
+​																										注册界面图
+
+![image-20240821201726213](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212017266.png)
+
+​																								稿件列表信息展示图
+
+![image-20240821201751740](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212017788.png)
+
+​																								新增稿件界面展示图
+
+![image-20240821201821966](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212018026.png)
+
+​																							稿件内容编写页面展示图
+
+![image-20240821202012868](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212020918.png)
+
+​																									稿件投递展示图
+
+![image-20240821202040154](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212020205.png)
+
+​																								上传终稿文件展示图
+
+![image-20240821202104956](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212021001.png)
+
+​																								终稿文件列表展示图
+
+![image-20240821202124810](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212021859.png)
+
+​																									审批意见展示图
+
+![image-20240821202142087](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212021132.png)
+
+​																								稿件审批展示图
+
+![image-20240821202227533](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212022585.png)
+
+​																							审批意见管理展示图
+
+![image-20240821202305919](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212023964.png)
+
+​																							终稿文件管理展示图
+
+![image-20240821202340192](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212023240.png)
+
+​																							稿件分配专家展示图
+
+![image-20240821202422079](https://cdn.jsdelivr.net/gh/chenpibupi/pic_cloud_img/picgo/202408212024126.png)
+
+​																						稿件发布与管理展示图
