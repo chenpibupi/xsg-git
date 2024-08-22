@@ -21,6 +21,7 @@ public class XSGSystemApplication
 {
     public static void main(String[] args)
     {
+
         SpringApplication.run(XSGSystemApplication.class, args);
         System.out.println("(♥◠‿◠)ﾉﾞ  系统模块启动成功   ლ(´ڡ`ლ)ﾞ");
     }
